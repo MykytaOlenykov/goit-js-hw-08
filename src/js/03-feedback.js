@@ -4,9 +4,7 @@ const formRef = document.querySelector('.feedback-form');
 
 const DATA_FORM_STORAGE_KEY = 'feedback-form-state';
 
-const formData = {};
-
-onRestoreDataField();
+const formData = onRestoreDataField();
 
 formRef.addEventListener('submit', onSubmitForm);
 formRef.addEventListener('input', throttle(onTextInput, 500));
@@ -35,13 +33,19 @@ function setDataForm() {
 }
 
 function onRestoreDataField() {
+  if (!localStorage.getItem(DATA_FORM_STORAGE_KEY)) {
+    return {};
+  }
+
   const savedDataForm = JSON.parse(localStorage.getItem(DATA_FORM_STORAGE_KEY));
 
-  if (savedDataForm?.email) {
+  if (savedDataForm.email) {
     formRef.email.value = savedDataForm.email;
   }
 
-  if (savedDataForm?.message) {
+  if (savedDataForm.message) {
     formRef.message.value = savedDataForm.message;
   }
+
+  return { ...savedDataForm };
 }
