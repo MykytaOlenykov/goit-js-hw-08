@@ -18,7 +18,7 @@ function onSubmitForm(e) {
 
   console.log({ email: email.value, message: message.value });
 
-  clearData();
+  clearFormData();
 }
 
 function onTextInput(e) {
@@ -49,7 +49,7 @@ function onRestoreDataField() {
   return { ...savedDataForm };
 }
 
-function clearData() {
+function clearFormData() {
   localStorage.removeItem(DATA_FORM_STORAGE_KEY);
   formRef.reset();
   formData = {};
