@@ -4,7 +4,7 @@ const formRef = document.querySelector('.feedback-form');
 
 const DATA_FORM_STORAGE_KEY = 'feedback-form-state';
 
-const formData = onRestoreDataField();
+let formData = onRestoreDataField();
 
 formRef.addEventListener('submit', onSubmitForm);
 formRef.addEventListener('input', throttle(onTextInput, 500));
@@ -18,8 +18,7 @@ function onSubmitForm(e) {
 
   console.log({ email: email.value, message: message.value });
 
-  localStorage.removeItem(DATA_FORM_STORAGE_KEY);
-  formRef.reset();
+  clearData();
 }
 
 function onTextInput(e) {
@@ -48,4 +47,10 @@ function onRestoreDataField() {
   }
 
   return { ...savedDataForm };
+}
+
+function clearData() {
+  localStorage.removeItem(DATA_FORM_STORAGE_KEY);
+  formRef.reset();
+  formData = {};
 }
