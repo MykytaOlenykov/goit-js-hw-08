@@ -16,7 +16,13 @@ function onSubmitForm(e) {
     elements: { email, message },
   } = formRef;
 
-  console.log({ email: email.value, message: message.value });
+  if (!email.value.length || !message.value.trim().length) {
+    alert('Заповніть усі поля');
+
+    return;
+  }
+
+  console.log({ email: email.value, message: message.value.trim() });
 
   clearFormData();
 }
