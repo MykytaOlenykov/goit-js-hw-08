@@ -14,7 +14,7 @@ function onSubmitForm(e) {
 
   const {
     elements: { email, message },
-  } = formRef;
+  } = e.currentTarget;
 
   if (!email.value.length || !message.value.trim().length) {
     alert('Заповніть усі поля');
